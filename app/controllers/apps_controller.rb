@@ -25,11 +25,11 @@ before_action :authenticate_user!, only: [:new, :edit]
 	end
 
 	def show
-		
+	
 		if @app.reviews.blank?
 			@average_review=0
 		else
-			@average_review=@app.reviews.average(:rating).round(2)
+			@average_review=@app.reviews.average(:rating)
 		end
 	end
 

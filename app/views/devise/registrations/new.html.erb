@@ -41,6 +41,12 @@
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
+  <div class="field">
+  <%= hidden_field_tag :captcha_secret, @captcha.encrypt %>
+  <%= label_tag :captcha, @captcha.question %>
+  <%= text_field_tag :captcha, "" %>
+  </div>
+
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>

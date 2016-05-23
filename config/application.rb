@@ -22,5 +22,9 @@ module Team
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+    config.autoload_paths += %W(#{config.root}/lib)
+    config.autoload_paths += Dir["#{config.root}/lib/**/"]
+    export RECAPTCHA_PUBLIC_KEY  = '6LcPSCATAAAAAJOC6zQyOV511zNHLect41ZdcTTn'
+    export RECAPTCHA_PRIVATE_KEY = '6LcPSCATAAAAAKzyu7uX8ZfJBlFnB_LqmL7qkWHq'
   end
 end

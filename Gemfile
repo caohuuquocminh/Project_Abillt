@@ -33,3 +33,13 @@ group :development do
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+# Tracking/analytics
+gem 'ahoy_matey'
+gem 'activeuuid', '~> 0.6.1'
+
+# Captcha
+gem "recaptcha", require: "recaptcha/rails"
+
+# Contact us
+gem 'mail_form'

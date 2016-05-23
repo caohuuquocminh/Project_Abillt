@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'messages/new'
+
   devise_for :users
   resources :categories
   resources :apps do
@@ -14,4 +16,6 @@ Rails.application.routes.draw do
     resources :reviews, except: [:show, :index]
   end
   
+  resources :messages, only: [:new, :create]
+
 end
