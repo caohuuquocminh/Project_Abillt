@@ -747,7 +747,7 @@
     space        : true,
     starHalf     : 'star-half.jpg',
     starOff      : 'star-off.jpg',
-    starOn       : 'star-on.jpg',
+    starOn       : 'star-on.jpg',   
     starType     : 'img',
     target       : undefined,
     targetFormat : '{score}',
