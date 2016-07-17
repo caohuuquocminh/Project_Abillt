@@ -1,0 +1,14 @@
+<div class="review-rating" data-score="<%= review.rating %>"></div
+<p><%= review.comment %></p>
+<p>Geschrieben von <b><%= review.user.username %></b></p>
+
+
+<% if user_signed_in? %>
+
+	<% if review.user_id == current_user.id %>			
+		<%= link_to "Bearbeiten", edit_app_review_path(review.app, review) %>
+		<%= link_to "Löschen", app_review_path(review.app, review), method: :delete, data: { confirm: "Bist du sicher?" }%>
+	<% end %>	
+
+<% end %>
+		

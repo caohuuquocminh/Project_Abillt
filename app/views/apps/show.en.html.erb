@@ -1,0 +1,82 @@
+<div align="right">
+
+<a href="javascript:SocialShare('https://twitter.com/share?s','https://sheltered-sierra-40726.herokuapp.com/apps/1', 'Fb Share', 'Facebook share popup', 'https://simplesharebuttons.com/images/somacro/facebook.png', 820, 850)"> <img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Twitter" /> </a>
+
+<a href="javascript:SocialShare('http://www.facebook.com/sharer.php?s','https://sheltered-sierra-40726.herokuapp.com/apps/1', 'Fb Share', 'Facebook share popup', 'https://simplesharebuttons.com/images/somacro/facebook.png', 820, 850)"><img src="https://simplesharebuttons.com/images/somacro/facebook.png" alt="Facebook" /></a>
+
+<a href="javascript:SocialShare('http://www.linkedin.com/shareArticle?s','https://sheltered-sierra-40726.herokuapp.com/apps/1', 'Fb Share', 'Facebook share popup', 'http://jonbennallick.co.uk/wp-content/uploads/2012/08/Facebook-logo-ICON-02.png', 820, 850)"> <img src="https://simplesharebuttons.com/images/somacro/linkedin.png" alt="LinkedIn" /></a>
+
+<a href="javascript:SocialShare('https://plus.google.com/share?s','https://sheltered-sierra-40726.herokuapp.com/apps/1', 'Fb Share', 'Facebook share popup', 'http://jonbennallick.co.uk/wp-content/uploads/2012/08/Facebook-logo-ICON-02.png', 820, 850)"> <img src="https://simplesharebuttons.com/images/somacro/google.png" alt="Google" /></a>
+
+</div>
+
+	</div>
+<div class="row">
+	<div class="col-md-4">
+	<%= image_tag @app.app_img.url(:app_show), class: "app-show" %>
+	</div>
+	<div class="col-md-8">
+		<div class="app-info">
+		<h2 class="app-name"><%= App.human_attribute_name(:name) %>: <%= @app.name %></h2>
+		<h4><%= Category.human_attribute_name(:name)%>: <%= @app.category.name %></h4>
+		<h2 class="avg-rating">Average Rating</h2>
+		<div class="average-review-rating" data-score=<%= @average_review %>></div>
+		<span class="number-of-reviews">Based on <%= @app.reviews.count %>reviews</span>
+		<p class="app-desc"><%= App.human_attribute_name(:description) %>: <%= @app.description %></p>
+		<p class="app-name"><%= App.human_attribute_name(:link) %>: <a href="<%= @app.link %>"><%= @app.link %></p></a>
+		<p class="app-name"><%= App.human_attribute_name(:developer)%>: <%= @app.developer %></p>
+		<p class="app-name"><%= App.human_attribute_name(:operation)%>: <%= @app.operation %></p>
+		<p class="app-name"><%= App.human_attribute_name(:price) %>: <%= @app.price %></p>
+
+		<p><%= raw(youtube_embed("https://www.youtube.com/watch?v=Y7bxlR-MxxM")) %></p>
+
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-4">
+
+		<%= render @app.reviews %>
+		<div>
+				<%= link_to "Add Review", new_app_review_path(@app) %>
+		</div>
+	</div>
+</div>
+
+
+<%= link_to "Back", root_path %>
+<% if user_signed_in? %>
+	<% if @app.user_id==current_user.id %>
+	<%= link_to "Edit", edit_app_path(@app) %>
+	<%= link_to "Delete", app_path(@app), method: :delete, data: {confirm: "Are you sure"} %>
+	<% end %>
+<% end %>
+
+<script>
+	$('.review-rating').raty({
+		readOnly: true,
+		score: function() {
+			return $(this).attr('data-score');
+		},
+		path: '/assets/'
+	});
+</script>
+<script>
+	$('.average-review-rating').raty({
+		readOnly: true,
+		path: '/assets/',
+		score: function() {
+			return $(this).attr('data-score')
+		}
+	});
+</script>
+
+
+<script>
+    function SocialShare(social,url,title, descr, image, winWidth, winHeight) {
+        var winTop = (screen.height / 2) - (winHeight / 2);
+        var winLeft = (screen.width / 2) - (winWidth / 2);
+        window.open(social+'=100&p[title]=' + title + '&p[summary]=' + descr + '&p[url]=' + url + '&p[images][0]=' + image, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
+    }
+</script>

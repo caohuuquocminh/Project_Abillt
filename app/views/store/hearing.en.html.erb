@@ -1,0 +1,22 @@
+ <h1>Store Listing</h1>
+Sort By: 
+<li><%= link_to "All Products", store_path %></li>
+<li><%= link_to "Free", free_path %></li>
+
+<br>
+<h3>Price is displayed in ascending order.</h3>
+
+
+ <h2> <strong> Hearing Impairement</strong></h2>
+
+ <div class="app">
+  <% @learning.each do |blind| %>
+
+<div class="col-md-3">
+      <a href="/apps/<%= blind.id %>"><%= image_tag blind.app_img.url(:app_index, :alt => "This is a picture"), class: "app_image"   %></a>
+      <p><%= link_to blind.name, app_path(blind) %></p>
+      <p class="app-name"><%= blind.price %></p>
+      <div class="average-review-rating" data-score=<%= blind.reviews.average(:rating) %>></div>
+      </div>
+<% end %>
+</div>
