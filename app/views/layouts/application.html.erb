@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gruppe</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+        <!--Start of Zopim Live Chat Script-->
+<script type="text/javascript">
+window.$zopim||(function(d,s){var z=$zopim=function(c){
+z._.push(c)},$=z.s=
+d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+_.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
+$.src='//v2.zopim.com/?3x6HD4XfKARGFEWbUWcltRYw9XxC99mh';z.t=+new Date;$.
+type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
+</script>
+<!--End of Zopim Live Chat Script-->
+
+<nav class="navbar navbar-default">
+		<div class="container">
+
+		
+
+			<div class="navbar-header">
+				<%= link_to "Prüfung der Bewerbung", root_path, class: "navbar-brand" %>
+			</div>
+			<ul class="nav navbar-nav">
+				<li><%= link_to "Anmelden", new_user_registration_path %></li>
+				<% if user_signed_in? %>
+						<li><%= link_to "Ausloggen", destroy_user_session_path, method: :delete %></li>
+				<% else %>	
+					<li><%= link_to "Einloggen", new_user_session_path %></li>
+				<% end %>
+			</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Kategorien <span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<% Category.all.each do |category| %>
+							<li class="<%= 'active' if params[:category] == category.name %>">
+								<%= link_to category.name, apps_path(category: category.name), class: "link" %>
+							</li>
+						<% end %>
+					</ul>
+				</li>
+
+			<%= form_tag apps_path, method: :get, class: "navbar-form navbar-right", role: "search" do %>
+        		<p>
+         	   <%= text_field_tag :search, params[:search], class: "form-control" %>
+       		   <%= submit_tag "Suche", name: nil, class: "btn btn-default" %>
+       			 </p>
+      			<% end %>
+
+
+
+				<% if user_signed_in? %>
+					<li><%= link_to "Applikation hinzufügen", new_app_path %></li>
+          <li><%= link_to "Neue Kategorie hinzufügen", new_category_path %></li>
+				<% end %>
+        <li> <%= link_to_unless_current "English", locale: "en" %> </li>
+        <li><%= link_to_unless_current "German", locale: "de" %> </li>
+			</ul>
+		</div>
+</nav>
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+    <li data-target="#myCarousel" data-slide-to="3"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <div class="item active">
+      <%= image_tag("BeMyEye.png", :alt => "rss feed" ) %>
+    </div>
+    <div class="item">
+      <%= image_tag("BeMyEye.png", :alt => "rss feed" ) %>
+    </div>
+  </div>
+
+  <!-- Left and right controls -->
+  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Früher</span>
+  </a>
+  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Nächster</span>
+  </a>
+</div>
+
+
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+<div class="container">
+	<%= yield %>
+</div>
+</body>
+</html>

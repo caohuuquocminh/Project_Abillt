@@ -1,0 +1,12 @@
+	<section class="product">
+          <h2><%= link_to product.name, store_product_path(product) %></h2>
+    
+          <ul><%= number_to_currency product.price %></ul>
+          <td><%= image_tag product.app_img.url(:app_index) %></td>
+        </dl>
+        
+        <td class="image-description">
+          <%= image_tag product.image_url, :class => 'list-image' %>
+        </td>
+
+	</section>

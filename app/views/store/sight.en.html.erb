@@ -1,0 +1,22 @@
+ <h1>Store Listing</h1>
+Sort By: 
+<li><%= link_to "All Products", sight_path %></li>
+<li><%= link_to "Free", free_path(:category_id => 2)%></li>
+
+<br>
+<h3>Price is displayed in ascending order.</h3>
+
+
+ <h2> <strong> Sight Impairement </strong></h2>
+
+ <div class="app">
+  <% @sight.each do |sight| %>
+
+<div class="col-md-3">
+      <a href="/apps/<%= sight.id %>"><%= image_tag sight.app_img.url(:app_index, :alt => "This is a picture"), class: "app_image"   %></a>
+      <p><%= link_to sight.name, app_path(sight) %></p>
+      <p class="app-name"><%= sight.price %></p>
+      <div class="average-review-rating" data-score=<%= sight.reviews.average(:rating) %>></div>
+      </div>
+<% end %>
+</div>

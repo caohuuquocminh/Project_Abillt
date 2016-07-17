@@ -1,0 +1,16 @@
+ 
+<div class="app">
+  <% @motorical.each do |motorical| %>
+
+<div class="col-md-3">
+      <a href="/apps/<%= motorical.id %>"><%= image_tag motorical.app_img.url(:app_index), class: "app_image" %></a>
+      <p><%= link_to motorical.name, app_path(motorical) %></p>
+      <p class="app-name"><%= motorical.price %></p>
+      <div class="average-review-rating" data-score=<%= motorical.reviews.average(:rating) %>></div>
+      </div>
+<% end %>
+</div>
+
+
+
+   
