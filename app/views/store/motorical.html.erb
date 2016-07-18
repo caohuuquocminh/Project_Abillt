@@ -1,16 +1,33 @@
- 
-<div class="app">
-  <% @motorical.each do |motorical| %>
+<h1>Store Listing</h1>
+Sort By: 
+<li><%= link_to "All Products", store_path %></li>
 
-<div class="col-md-3">
-      <a href="/apps/<%= motorical.id %>"><%= image_tag motorical.app_img.url(:app_index), class: "app_image" %></a>
-      <p><%= link_to motorical.name, app_path(motorical) %></p>
-      <p class="app-name"><%= motorical.price %></p>
-      <div class="average-review-rating" data-score=<%= motorical.reviews.average(:rating) %>></div>
-      </div>
+ <h2> <strong> Motorical </strong></h2>
+
+
+ <h2> <strong> Motorical German </strong></h2>
+
+<table id="products">
+  <tr>
+    <th><%= sort_link @search, :name, "Product Name" %></th>
+    <th><%= sort_link @search, :price, "Price" %></th>    
+    <th><%= sort_link @search, :category_id, "Category" %></th>
+
+    <th><%= sort_link @search, :rating, "Review",default_order: :desc %></th>
+    <th><%= sort_link @search, :app_img, "Image" %></th>
+
+  </tr>
+<% @products.each do |product| %>
+  <tr>
+    <td><%= link_to(product.name, product) %></td>
+    <td><%= number_to_currency(product.price) %></td>
+    <td><%= link_to(product.category.name, product) %></td>
+    <td><%= product.reviews.average(:rating) %></td>
+    
+    <td class="image-description">
+        <td><%= image_tag product.app_img.url(:app_index) %></td>
+    </td>
+  </tr>
 <% end %>
-</div>
+</table>
 
-
-
-   

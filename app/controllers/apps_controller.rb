@@ -77,7 +77,7 @@ before_action :authenticate_user!, only: [:new, :edit]
 	private
 
 	def app_params
-		params.require(:app).permit(:name, :description, :link, :developer, :operation, :price, :category_id, :app_img)
+		params.require(:app).permit(:name, :description, :link, :developer, :operation, :price, :category_id, :app_img, :rating, :reviews)
 		
 	end
 

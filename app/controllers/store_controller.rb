@@ -34,27 +34,33 @@ class StoreController < ApplicationController
   end
 
   def blind
-      @blind = App.where(:category_id => 1)
+      @search = App.search(params[:q]) if App.where(:category_id => 1)
+      @products = @search.result      
   end
 
   def sight
-      @sight = App.where(:category_id => 2)
+      @search = App.search(params[:q]) if App.where(:category_id => 1)
+      @products = @search.result  
   end
 
   def motorical 
-  	@motorical= App.where(:category_id=> 3)
+  	  @search = App.search(params[:q]) if App.where(:category_id => 1)
+      @products = @search.result  
   end 
 
   def learning
-    @learning = App.where(:category_id => 4)
+      @@search = App.search(params[:q]) if App.where(:category_id => 1)
+      @products = @search.result  
   end
 
   def hearing
-    @hearing = App.where(:category_id => 5)
+      @search = App.search(params[:q]) if App.where(:category_id => 1)
+      @products = @search.result  
   end
 
    def WheelChair
-    @WheelChair = App.where(:category_id => 6)
+      @search = App.search(params[:q]) if App.where(:category_id => 1)
+      @products = @search.result  
   end
 
 end

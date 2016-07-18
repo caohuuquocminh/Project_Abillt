@@ -1,21 +1,33 @@
- <h1>Store Listing</h1>
+<h1>Store Listing</h1>
 Sort By: 
-<li><%= link_to "All Products", sight_path %></li>
+<li><%= link_to "All Products", store_path %></li>
 
-<br>
-<h3>Price is displayed in ascending order.</h3>
+ <h2> <strong> Sight </strong></h2>
 
 
- <h2> <strong> Sight Impairement </strong></h2>
+ <h2> <strong> Sight German </strong></h2>
 
- <div class="app">
-  <% @sight.each do |sight| %>
+<table id="products">
+  <tr>
+    <th><%= sort_link @search, :name, "Product Name" %></th>
+    <th><%= sort_link @search, :price, "Price" %></th>    
+    <th><%= sort_link @search, :category_id, "Category" %></th>
 
-<div class="col-md-3">
-      <a href="/apps/<%= sight.id %>"><%= image_tag sight.app_img.url(:app_index, :alt => "This is a picture"), class: "app_image"   %></a>
-      <p><%= link_to sight.name, app_path(sight) %></p>
-      <p class="app-name"><%= sight.price %></p>
-      <div class="average-review-rating" data-score=<%= sight.reviews.average(:rating) %>></div>
-      </div>
+    <th><%= sort_link @search, :rating, "Review",default_order: :desc %></th>
+    <th><%= sort_link @search, :app_img, "Image" %></th>
+
+  </tr>
+<% @products.each do |product| %>
+  <tr>
+    <td><%= link_to(product.name, product) %></td>
+    <td><%= number_to_currency(product.price) %></td>
+    <td><%= link_to(product.category.name, product) %></td>
+    <td><%= product.reviews.average(:rating) %></td>
+    
+    <td class="image-description">
+        <td><%= image_tag product.app_img.url(:app_index) %></td>
+    </td>
+  </tr>
 <% end %>
-</div>
+</table>
+
