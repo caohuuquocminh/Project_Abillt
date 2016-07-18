@@ -5,9 +5,9 @@ before_action :authenticate_user!, only: [:new, :edit]
 	def index
 
 		if params[:category].blank? && params[:search].blank?
-		@apps_blind=App.where(category_id:1)
-		@apps_sight=App.where(category_id:2)
-		@apps_motorically=App.where(category_id:3)
+		@apps_blind=App.where(category_id:1).joins(:reviews).order("rating DESC")
+		@apps_sight=App.where(category_id:2).joins(:reviews).order("rating DESC")
+		@apps_motorically=App.where(category_id:3).joins(:reviews).order("rating DESC")
 		@apps_learning=App.where(category_id:4)
 		@apps_deaf=App.where(category_id:5)
 		@apps_whealchair=App.where(category_id:6)
@@ -41,7 +41,7 @@ before_action :authenticate_user!, only: [:new, :edit]
 
 		if @app.save
 			redirect_to root_path
-		else
+		else			
 			render 'new'
 		end
 	end
